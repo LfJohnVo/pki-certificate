@@ -1,0 +1,15 @@
+package com.udemy.pki.core;
+
+import java.security.KeyStore;
+
+public class CertificateStore {
+	
+	public static void getCertificateFromFile(String path, String key) {
+		try {
+			KeyStore jks = KeyStore.getInstance("PKCS12");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}//catch
+	}//termina metodo
+	
+}//termina class
