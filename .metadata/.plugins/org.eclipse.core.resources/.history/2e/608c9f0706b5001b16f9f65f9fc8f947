@@ -18,10 +18,7 @@ public class PDFTest {
 			CertificadoUdemy certificado= CertificateStore.getCertificateFromFile(Constante.CERTIFICADO, Constante.CLAVE);
 			Path path = Paths.get(Constante.PDF);
 			byte[] documento = Files.readAllBytes(path);
-			//linea para generar pdf basico
-			//documento = PadesFirma.firmaPdfBasico(documento, certificado);
-			//linea para generar firma avanzada
-			documento = PadesFirma.firmarPdfAvanzado(documento, certificado);
+			documento = PadesFirma.firmaPdfBasico(documento, certificado);
 			
 			FileOutputStream out = new FileOutputStream(Constante.PDF_FIRMADO);
 			out.write(documento);

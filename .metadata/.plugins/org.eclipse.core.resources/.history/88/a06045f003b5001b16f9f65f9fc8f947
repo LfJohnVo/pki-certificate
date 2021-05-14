@@ -20,7 +20,6 @@ public class CertificateStore {
 		CertificadoUdemy certificado = new CertificadoUdemy();
 		try {
 			//Abro archivo de keystore
-			//se usa PKCS12 cuando se necesita la llave publica y privada
 			KeyStore jks = KeyStore.getInstance("PKCS12");
 			InputStream in = new FileInputStream(path);
 			//extraigo el contenido y lo pongo en un array

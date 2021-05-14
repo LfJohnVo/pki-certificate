@@ -84,7 +84,7 @@ public class PadesFirma {
             String test = "dato: " + "prueba";
             SimpleDateFormat dateformatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss Z");
             String fecha = "Fecha: " + dateformatter.format(fechaFirma);
-            String firmaH = firmado + '\n' + razon + '\n' + lugar + '\n' + fecha + '\n' + test;
+            String firmaH = firmado + '\n' + razon + '\n' + lugar + '\n' + fecha;
             sap.setLayer2Text(firmaH);
             sap.setVisibleSignature(new Rectangle(100, 100, 350, 200), 1, null);
 			//Aqui se genera el proceso de obtencion del hash
