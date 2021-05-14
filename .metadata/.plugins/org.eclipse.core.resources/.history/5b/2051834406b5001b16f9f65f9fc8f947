@@ -21,7 +21,7 @@ public class PDFTest {
 			//linea para generar pdf basico
 			//documento = PadesFirma.firmaPdfBasico(documento, certificado);
 			//linea para generar firma avanzada
-			documento = PadesFirma.firmarPdfAvanzado(documento, certificado);
+			documento = PadesFirma.firmaPdfAvanzado(documento, certificado);
 			
 			FileOutputStream out = new FileOutputStream(Constante.PDF_FIRMADO);
 			out.write(documento);

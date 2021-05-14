@@ -58,7 +58,7 @@ public class PadesFirma {
 	public static byte[] firmarPdfAvanzado(byte[] dataDoc, CertificadoUdemy certificado) throws Exception {
 		try {
 			
-			PdfReader reader = new PdfReader(dataDoc);
+			PdfReader reader = new PdfReader(data);
 			ByteArrayOutputStream nuevoDocumento = new ByteArrayOutputStream();
 			//Se inicia para crear la firma digital dentro del pdf
 			PdfStamper stp = PdfStamper.createSignature(reader, nuevoDocumento, '\000', null, true);
@@ -81,19 +81,18 @@ public class PadesFirma {
             String firmado = "Firmado por " + PdfPKCS7.getSubjectFields(certificado.getPublicCertificate()).getField("CN");
             String razon = "Motivo: " + "Firma Digital";
             String lugar = "Lugar: " + "México";
-            String test = "dato: " + "prueba";
             SimpleDateFormat dateformatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss Z");
             String fecha = "Fecha: " + dateformatter.format(fechaFirma);
-            String firmaH = firmado + '\n' + razon + '\n' + lugar + '\n' + fecha + '\n' + test;
+            String firmaH = firmado + '\n' + razon + '\n' + lugar + '\n' + fecha;
             sap.setLayer2Text(firmaH);
             sap.setVisibleSignature(new Rectangle(100, 100, 350, 200), 1, null);
-			//Aqui se genera el proceso de obtencion del hash
+			
             int contentEstimated = 8192;
             System.out.println(reader.getFileLength());
             HashMap<PdfName, Integer> exc = new HashMap<>();
             exc.put(PdfName.CONTENTS, new Integer(contentEstimated * 2 + 2));
             sap.preClose(exc);
-            //Aqui se hace el calculo para generar el algoritmo con sha-256
+            
             InputStream data = sap.getRangeStream();
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             byte[] buf = new byte[contentEstimated];
@@ -101,31 +100,6 @@ public class PadesFirma {
             while ((n = data.read(buf)) > 0) {
                 messageDigest.update(buf, 0, n);
             }
-            
-            //Aqui se obtiene hash despues de los calculos
-            byte[] hash = messageDigest.digest();
-            Calendar calendario = Calendar.getInstance();
-            
-            //Generamos la firma digital y se añade con el cifrado asimetrico
-            PdfPKCS7 sgn = new PdfPKCS7(certificado.getPrivateKey(), certificado.getCertificateChain(), null, "SHA-256", null, false);
-            byte[] sh = sgn.getAuthenticatedAttributeBytes(hash, calendario, null);
-            sgn.update(sh, 0, sh.length);
-            //se genera cadena firmada digitalmente
-            byte[] encodedSig = sgn.getEncodedPKCS7(hash, calendario, null, null);
-            
-            //Se junta toda la información y se añade al pdf
-            byte[] paddedSig = new byte[contentEstimated];
-            System.arraycopy(encodedSig, 0, paddedSig, 0, encodedSig.length);
-            PdfDictionary pdfDic = new PdfDictionary();
-            pdfDic.put(PdfName.CONTENTS, new PdfString(paddedSig).setHexWriting(true));
-            sap.close(pdfDic);
-			
-            reader.close();
-            nuevoDocumento.flush();
-            nuevoDocumento.close();
-            
-			return nuevoDocumento.toByteArray();
-
 			
 		} catch (Exception e) {
 			e.printStackTrace();

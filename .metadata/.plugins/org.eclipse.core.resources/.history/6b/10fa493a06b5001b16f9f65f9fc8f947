@@ -11,6 +11,7 @@ import com.udemy.pki.core.PadesFirma;
 import com.udemy.pki.util.Constante;
 
 public class PDFTest {
+maria andrea
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -21,7 +22,7 @@ public class PDFTest {
 			//linea para generar pdf basico
 			//documento = PadesFirma.firmaPdfBasico(documento, certificado);
 			//linea para generar firma avanzada
-			documento = PadesFirma.firmarPdfAvanzado(documento, certificado);
+			documento = PadesFirma.firmaPdfAvanzado(documento, certificado);
 			
 			FileOutputStream out = new FileOutputStream(Constante.PDF_FIRMADO);
 			out.write(documento);
