@@ -1,0 +1,16 @@
+package com.udemy.pki.core;
+
+public class PadesFirma {
+	//byte es el pdf a firmar y certificado el certificado
+	public static byte[] firmaPdfBasico(byte[] data, ) throws Exception {
+		
+		try {
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+}

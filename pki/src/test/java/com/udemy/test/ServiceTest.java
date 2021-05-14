@@ -14,13 +14,14 @@ public class ServiceTest {
 		try {
 			//Con esto podemos obtener nuestro certificado digital desde archivo pfx o jks
 			CertificadoUdemy certificado= CertificateStore.getCertificateFromFile(Constante.CERTIFICADO, Constante.CLAVE);
-			System.out.println("/****************Obteniendo certificado de archivo pdf o jks****************/");
+			System.out.println("/****************Obteniendo certificado de archivo pfx o jks****************/");
 			System.out.println(certificado.getAlias());
 			System.out.println("----------------------------------------------");
 			System.out.println(certificado.getPrivateKey().getAlgorithm());
 			System.out.println("----------------------------------------------");
 			System.out.println(certificado.getPublicCertificate().toString());
 			System.out.println("----------------------------------------------");
+			
 			//listar certificados en el almacen
 			System.out.println("/****************Listando certificados registrados en el almacen de windows****************/");
 			List<CertificadoUdemy> listCertificadoUdemy = CertificateStore.listCertificateFromStore();
