@@ -1,6 +1,0 @@
-package com.udemy.pki.util;
-
-public class Constante {
-	public static final String CERTIFICADO = "john.pfx\´";
-	public static final String CLAVE = "123456789";
-}
